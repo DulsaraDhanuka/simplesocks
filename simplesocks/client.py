@@ -10,7 +10,7 @@ class ClientReceiveDataTimeoutException(Exception):
         super().__init__("Client did not recieve any data", *args)
 
 class SimpleClient():
-    def __init__(self, server_host: str, server_port: int, connection_id: str=None, header_length: int=10, server_key: str=None) -> None:
+    def __init__(self, server_host: str, server_port: int, connection_id: str=None, header_length: int=10, server_key: bytes=None) -> None:
         self._header_length = header_length
         self._connection_id = connection_id
         if self._connection_id is None:
@@ -18,11 +18,10 @@ class SimpleClient():
 
         self._fernet: Fernet = None
         if server_key is not None:
-            self._fernet = Fernet(server_key.encode('utf-8'))
+            self._fernet = Fernet(server_key)
         
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.connect((server_host, server_port))
-        #self._socket.setblocking(False)
 
         self.send_data(json.dumps({'id': self._connection_id}).encode('utf-8'))
 

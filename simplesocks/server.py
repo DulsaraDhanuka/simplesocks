@@ -6,7 +6,7 @@ from typing import List
 from cryptography.fernet import Fernet
 
 class SimpleServer():
-    def __init__(self, host: str=None, port: int=4444, header_length: int=10, server_key: str=None) -> None:
+    def __init__(self, host: str=None, port: int=4444, header_length: int=10, server_key: bytes=None) -> None:
         self._header_length: int = header_length
         if host is None:
             host = socket.gethostbyname(socket.gethostname())
@@ -14,7 +14,7 @@ class SimpleServer():
 
         self._fernet: Fernet = None
         if server_key is not None:
-            self._fernet = Fernet(server_key.encode('utf-8'))
+            self._fernet = Fernet(server_key)
 
         self._socket: socket.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)

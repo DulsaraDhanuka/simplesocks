@@ -1,6 +1,6 @@
 # Simplesocks
 
-A simple socket wrapper for python built on top of the standard socket library
+A simple socket wrapper for python built on top of the standard socket library with password based encryption for security.
 
 ## Instructions 
 
@@ -37,7 +37,7 @@ class TestServer(SimpleServer):
         super().close_client_connection(client_id, client_socket)
         print(f"Client {client_id} disconnected")
 
-server = TestServer()
+server = TestServer(server_key=b"msZ5ZR9zjtBXRzssQ3qD33FAVxTBir55rHa1dAJlV5g=")
 server.listen()
 ```
 
@@ -49,7 +49,7 @@ import threading
 import time
 from simplesocks.client import SimpleClient, ClientReceiveDataTimeoutException
 
-client = Client('192.168.1.200', 4444)
+client = SimpleClient('192.168.1.200', 4444, server_key=b"msZ5ZR9zjtBXRzssQ3qD33FAVxTBir55rHa1dAJlV5g=")
 
 def receive():
     while True:
