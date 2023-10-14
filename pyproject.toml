@@ -4,3 +4,25 @@ requires = [
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "simplesocks"
+version = "1.0.0"
+authors = [
+  { name="Dulsara Dhanuka", email="dulsara.dhanuka@gmail.com" },
+]
+description = "A simple wrapper written on top of standard python sockets"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "cryptography"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/DulsaraDhanuka/simplesocks"
+"Bug Tracker" = "https://github.com/DulsaraDhanuka/simplesocks/issues"
